@@ -68,4 +68,19 @@ public class StateGraph {
     public ArrayList<State> getStateList() {
         return stateList;
     }
+
+    public void mergeStates(State state1, State state2) {
+        //System.out.println(String.format("State %s and State %s merged", state1.getStateName(), state2.getStateName()));
+        state1.removeNeighbourState(state2);
+        state2.removeNeighbourState(state1);
+        if (state1.getStateId() > state2.getStateId()) {
+            State dummyState = state1;
+            state1 = state2;
+            state2 = dummyState;
+        }
+        state1.addNewNeighbourStates(state2.getNeighbourStates());
+        state1.setStateName(state1.getStateName() + " - " + state2.getStateName());
+        this.stateList.remove(state2);
+
+    }
 }

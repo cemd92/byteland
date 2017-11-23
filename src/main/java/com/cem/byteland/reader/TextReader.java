@@ -17,7 +17,6 @@ public class TextReader {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
-                System.out.println(line);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File Not Found!");

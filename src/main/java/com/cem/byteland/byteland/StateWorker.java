@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class StateFacade {
+public class StateWorker {
 
     private StateGraph stateGraph;
     private Integer negotiationCount = 0;
@@ -20,23 +20,27 @@ public class StateFacade {
     }
 
     public void uniteStates() {
-
         while (!isUnited()) {
             ArrayList<State> sortedStateList = getStatesSortedByNeighbourCount();
-            Integer possibleNegotiationNumber = new Double(Math.floor(sortedStateList.size() / 2)).intValue();
-            //List<State> bigStates = sortedStateList.subList(0, possibleNegotiationNumber);
             Iterator<State> iterator = sortedStateList.iterator();
 
             Integer i = 0;
-            while (iterator.hasNext()) {
+            while (iterator.hasNext() && sortedStateList.size() > 1) {
                 State state1 = iterator.next();
-                //State state2 =
-                this.negotiationCount++;
+                State state2;
+                try {
+                    state2 = getUnmergedNeighbourCity(sortedStateList, state1);
+                } catch (Exception e) {
+                    continue;
+                }
+                stateGraph.mergeStates(state1, state2);
+                sortedStateList.remove(state1);
+                sortedStateList.remove(state2);
+                iterator = sortedStateList.iterator();
             }
-
-            System.out.println(this.negotiationCount);
+            this.negotiationCount++;
         }
-
+        System.out.println(this.negotiationCount);
     }
 
     private ArrayList<State> getStatesSortedByNeighbourCount() {
@@ -53,22 +57,12 @@ public class StateFacade {
         return true;
     }
 
-    private State getLessConnectedNeighbourState(State state) {
-        ArrayList<State> allNeighbourStates = state.getNeighbourStates();
-        ArrayList<State> lessConnectedNeighbourStates = new ArrayList<>();
-
-        for (State neighbourState : allNeighbourStates) {
-
-        }
-        return null;
-    }
-
-    private Integer getStateRoadDepth(State state) {
-        Integer depth = 0;
+    private State getUnmergedNeighbourCity(ArrayList<State> sortedStateList, State state) throws Exception {
         for (State neighbourState : state.getNeighbourStates()) {
-
+            if (sortedStateList.contains(neighbourState)) {
+                return neighbourState;
+            }
         }
-        return null;
+        throw new Exception("Handle alone state!");
     }
-
 }
