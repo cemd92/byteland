@@ -61,5 +61,11 @@ public class StateGraph {
         state2.addNewNeighbourState(state1);
     }
 
+    public Integer getStateCount() {
+        return this.stateList.size();
+    }
 
+    public ArrayList<State> getStateList() {
+        return stateList;
+    }
 }

@@ -2,7 +2,7 @@ package com.cem.byteland.byteland;
 
 import java.util.ArrayList;
 
-public class State {
+public class State implements Comparable<State> {
 
     private int stateId;
     private ArrayList<State> neighbourStates;
@@ -23,5 +23,15 @@ public class State {
 
     public String toString() {
         return String.valueOf(this.stateId);
+    }
+
+    @Override
+    public int compareTo(State state) {
+        if (this.getNeighbourStates().size() > state.getNeighbourStates().size()) {
+            return -1;
+        } else if (this.getNeighbourStates().size() < state.getNeighbourStates().size()) {
+            return 1;
+        }
+        return 0;
     }
 }

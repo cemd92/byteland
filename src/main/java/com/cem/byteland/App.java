@@ -1,8 +1,11 @@
 package com.cem.byteland;
 
 import com.cem.byteland.byteland.StateFacade;
+import com.cem.byteland.reader.ByteLandCase;
 import com.cem.byteland.reader.CaseCreator;
 import com.cem.byteland.reader.TextReader;
+
+import java.util.ArrayList;
 
 /**
  * Hello world!
@@ -13,7 +16,11 @@ public class App {
 
 
         StateFacade stateFacade = new StateFacade();
-        stateFacade.createStateMap(CaseCreator.getCasesFromFile("input.txt"));
+        ArrayList<ByteLandCase> byteLandCaseList = CaseCreator.getCasesFromFile("input.txt");
+
+        for (ByteLandCase byteLandCase : byteLandCaseList) {
+            stateFacade.createStateMap(byteLandCase);
+        }
 
 
     }
