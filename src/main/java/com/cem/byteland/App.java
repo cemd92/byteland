@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 public class App {
     public static void main(String[] args) {
+        //Get cases from input file
         ArrayList<ByteLandCase> byteLandCaseList = CaseCreator.getCasesFromFile("input.txt");
 
+        //Work on cases
         for (ByteLandCase byteLandCase : byteLandCaseList) {
             StateWorker stateWorker = new StateWorker();
             stateWorker.createStateMap(byteLandCase);

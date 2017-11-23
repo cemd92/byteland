@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 public class TextReader {
 
+    /**
+     * Reads the given file
+     *
+     * @param fileName
+     * @return List of lines
+     */
     static ArrayList<String> ReadFile(String fileName) {
         ArrayList<String> lines = null;
         BufferedReader bufferedReader = null;

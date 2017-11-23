@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 public class CaseCreator {
 
-
+    /**
+     * Crates the case objects from given file name
+     *
+     * @param fileName
+     * @return List of cases
+     */
     public static ArrayList<ByteLandCase> getCasesFromFile(String fileName) {
         ArrayList<String> lines = TextReader.ReadFile(fileName);
         ArrayList<ByteLandCase> cases = new ArrayList<>();

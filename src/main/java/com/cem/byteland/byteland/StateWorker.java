@@ -8,9 +8,14 @@ import java.util.Iterator;
 
 public class StateWorker {
 
-    private StateGraph stateGraph;
-    private Integer negotiationCount = 0;
+    private StateGraph stateGraph;//state map
+    private Integer negotiationCount = 0;//total negotiation round
 
+    /**
+     * Initialize the states locations
+     *
+     * @param byteLandCase
+     */
     public void createStateMap(ByteLandCase byteLandCase) {
         this.stateGraph = new StateGraph();
         for (Integer distance : byteLandCase.getDistanceList()) {
@@ -19,12 +24,14 @@ public class StateWorker {
         uniteStates();
     }
 
+    /**
+     * Unites states
+     */
     public void uniteStates() {
         while (!isUnited()) {
             ArrayList<State> sortedStateList = getStatesSortedByNeighbourCount();
             Iterator<State> iterator = sortedStateList.iterator();
 
-            Integer i = 0;
             while (iterator.hasNext() && sortedStateList.size() > 1) {
                 State state1 = iterator.next();
                 State state2;
@@ -43,6 +50,12 @@ public class StateWorker {
         System.out.println(this.negotiationCount);
     }
 
+    /**
+     * Returns the sorted list of states
+     * least neighbour to most
+     *
+     * @return Sorted list of states
+     */
     private ArrayList<State> getStatesSortedByNeighbourCount() {
         ArrayList<State> sortedStateList = new ArrayList<>(stateGraph.getStateList());
         Collections.sort(sortedStateList);
@@ -50,6 +63,11 @@ public class StateWorker {
 
     }
 
+    /**
+     * Checks all states are united
+     *
+     * @return If there is only one state returns true
+     */
     private Boolean isUnited() {
         if (stateGraph.getStateCount() > 1) {
             return false;
@@ -57,6 +75,14 @@ public class StateWorker {
         return true;
     }
 
+    /**
+     * Searches for the unnegotiated state to negotiate
+     *
+     * @param sortedStateList
+     * @param state
+     * @return Unnegotiated state
+     * @throws Exception
+     */
     private State getUnmergedNeighbourCity(ArrayList<State> sortedStateList, State state) throws Exception {
         for (State neighbourState : state.getNeighbourStates()) {
             if (sortedStateList.contains(neighbourState)) {
