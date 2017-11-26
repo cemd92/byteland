@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class State implements Comparable<State> {
 
-    private int stateId;//states unique id
+    private Integer stateId;//states unique id
     private String stateName;//states name
     private ArrayList<State> neighbourStates;// Neighbour state list
 
@@ -14,7 +14,7 @@ public class State implements Comparable<State> {
      *
      * @param stateId
      */
-    public State(int stateId) {
+    public State(Integer stateId) {
         this.stateId = stateId;
         this.stateName = String.valueOf(stateId);
         this.neighbourStates = new ArrayList<>();
@@ -25,7 +25,7 @@ public class State implements Comparable<State> {
      *
      * @return State Id
      */
-    public int getStateId() {
+    public Integer getStateId() {
         return stateId;
     }
 

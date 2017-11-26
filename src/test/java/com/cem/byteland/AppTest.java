@@ -1,12 +1,22 @@
 package com.cem.byteland;
 
+import com.cem.byteland.byteland.StateGraphTest;
+import com.cem.byteland.byteland.StateTest;
+import com.cem.byteland.reader.ByteLandCaseTest;
+import com.cem.byteland.reader.TextReaderTest;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * Unit test for simple App.
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        ByteLandCaseTest.class, TextReaderTest.class, StateTest.class, StateGraphTest.class
+})
 public class AppTest
         extends TestCase {
     /**
